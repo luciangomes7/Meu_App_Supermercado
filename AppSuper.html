@@ -7,9 +7,12 @@
     <style>
         h1{color: whitesmoke;}
         button{ height: 25px;margin: 2px;width: 70px; }
+        label{ font-size: 22px;}
+        li{list-style: none;}
         #controle{ background-color: #2467f8d6;padding: 15px; width: 315px; height: 200px;text-align: center;margin: auto;}
-        #listagem{ background-color: #3977ffac;padding: 15px; width: 315px; height: 200px;margin: auto;text-align: center;}
+        #listagem{ background-color: #3977ffac;padding: 15px; width: 315px; height: 200px;margin: auto;text-align: left;}
         #entrada{ height: 25px; font-size: 14px;}
+        .caixa{ width: 15px; height: 15px;}
     </style>
 
 
@@ -21,17 +24,18 @@
 
         <input type="text" size="40" id="entrada" placeholder="Insira o item">
     <p>
-        <button onclick="inserir()">Adicionar</button>
-        <button onclick="listar()">Listar</button>
-        <button onclick="limpar()">Limpar</button>
-        <button onclick="apagar()">Apagar</button>
+        <button onclick="inserir()" id="inserir">Inserir</button>
+        <button onclick="remover()" id="remover">Remover</button>
+        <button onclick="limpar()" id="limpar">Limpar</button>
+        <button onclick="listar()" id="listar">Listar</button>
+              
     </p>
     </div>
 
     <!--Área de Listagem-->
     <div id="listagem">
         <ul id="listaUL">
-
+            <!--<li><input type="checkbox" id="+entrada+" class="caixa" ><label>+textoEntrada+</label></li>-->
         </ul>
 
     </div>
@@ -41,13 +45,20 @@
         //declaracao de variavel
         var listaUL = document.getElementById("listaUL");
         var listaCompras = [];
+        
 
         //criando funcao
         function inserir(){
             var textoEntrada = document.getElementById("entrada").value;
-            listaUL.innerHTML += "<li>"+textoEntrada+"</li>";
-            listaCompras.push(textoEntrada);
-
+            
+            if(textoEntrada != ""){
+                listaCompras.push(textoEntrada);
+                listaUL.innerHTML += "<li><input type='checkbox' id='"+entrada+"' class='caixa'><label>"+textoEntrada+"</label></li>";
+                document.getElementById("entrada").value = ""; //limpa o caixa de texto após add item
+            }
+            else{
+                  window.alert("Insira o nome do Item!");
+            }
         }
 
         function limpar(){
@@ -55,12 +66,13 @@
         }
 
         function listar(){
+            limpar();
             listaCompras.forEach(item =>{ 
-                listaUL.innerHTML += "<li>"+item+"</li";
-                });
+                listaUL.innerHTML += "<li><input type='checkbox' id='"+item+"' class='caixa'><label>"+item+"</label></li>";
+            });
         }
 
-        function apagar(){
+        function remover(){
             listaCompras.pop();
             limpar();
             listar();
