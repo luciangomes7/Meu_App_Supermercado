@@ -4,38 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Compras</title>
+    <style>
+        h1{color: whitesmoke;}
+        button{ height: 25px;margin: 2px;width: 70px; }
+        #controle{ background-color: #2467f8d6;padding: 15px; width: 315px; height: 200px;text-align: center;margin: auto;}
+        #listagem{ background-color: #3977ffac;padding: 15px; width: 315px; height: 200px;margin: auto;text-align: center;}
+        #entrada{ height: 25px; font-size: 14px;}
+    </style>
+
+
 </head>
 <body>
     <!-- Área de Controle-->
-    <div>
-        <input type="text" size="42" id="entrada" placeholder="Insira o item">
+    <div id="controle">
+        <h1>Lista de Compras</h1>
+
+        <input type="text" size="40" id="entrada" placeholder="Insira o item">
+    <p>
+        <button onclick="inserir()">Adicionar</button>
+        <button onclick="listar()">Listar</button>
+        <button onclick="limpar()">Limpar</button>
+        <button onclick="apagar()">Apagar</button>
+    </p>
     </div>
 
     <!--Área de Listagem-->
     <div id="listagem">
-        <ul id="listagem">
+        <ul id="listaUL">
 
         </ul>
 
     </div>
-
-    
-    <button onclick="inserir()">Adicionar</button>
-    <button onclick="listar()">Listar</button>
-    <button onclick="limpar()">Limpar</button>
-    <button onclick="apagar()">Apagar</button>
-    
-    <h1>Lista de Compras</h1>
-
-    
-    <ul id="lista">
-
-    </ul>
-
-    <script>
+ 
+ <script>
 
         //declaracao de variavel
-        var listaUL = document.getElementById("lista");
+        var listaUL = document.getElementById("listaUL");
         var listaCompras = [];
 
         //criando funcao
