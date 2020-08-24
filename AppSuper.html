@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Compras</title>
+</head>
+<body>
+    <!-- Área de Controle-->
+    <div>
+        <input type="text" size="42" id="entrada" placeholder="Insira o item">
+    </div>
+
+    <!--Área de Listagem-->
+    <div id="listagem">
+        <ul id="listagem">
+
+        </ul>
+
+    </div>
+
+    
+    <button onclick="inserir()">Adicionar</button>
+    <button onclick="listar()">Listar</button>
+    <button onclick="limpar()">Limpar</button>
+    <button onclick="apagar()">Apagar</button>
+    
+    <h1>Lista de Compras</h1>
+
+    
+    <ul id="lista">
+
+    </ul>
+
+    <script>
+
+        //declaracao de variavel
+        var listaUL = document.getElementById("lista");
+        var listaCompras = [];
+
+        //criando funcao
+        function inserir(){
+            var textoEntrada = document.getElementById("entrada").value;
+            listaUL.innerHTML += "<li>"+textoEntrada+"</li>";
+            listaCompras.push(textoEntrada);
+
+        }
+
+        function limpar(){
+            listaUL.innerHTML = "";
+        }
+
+        function listar(){
+            listaCompras.forEach(item =>{ 
+                listaUL.innerHTML += "<li>"+item+"</li";
+                });
+        }
+
+        function apagar(){
+            listaCompras.pop();
+            limpar();
+            listar();
+        }
+                      
+    </script>
+
+</body>
+</html>
