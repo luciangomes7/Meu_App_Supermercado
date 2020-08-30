@@ -13,6 +13,7 @@
         #listagem{ background-color: #3977ffac;padding: 15px; width: 315px; height: 200px;margin: auto;text-align: left;}
         #entrada{ height: 25px; font-size: 14px;}
         .caixa{ width: 15px; height: 15px;}
+        .riscado{font-size: 22px; text-decoration: line-through;}
     </style>
 
 
@@ -43,17 +44,18 @@
  <script>
 
         //declaracao de variavel
-        var listaUL = document.getElementById("listaUL");
+        
         var listaCompras = [];
         
 
         //criando funcao
         function inserir(){
-            var textoEntrada = document.getElementById("entrada").value;
-            
-            if(textoEntrada != ""){
-                listaCompras.push(textoEntrada);
-                listaUL.innerHTML += "<li><input type='checkbox' id='"+entrada+"' class='caixa'><label>"+textoEntrada+"</label></li>";
+            var entrada = document.getElementById("entrada").value;
+            var listaUL = document.getElementById("listaUL");
+
+            if(entrada != ""){
+                listaCompras.push(entrada);
+                listaUL.innerHTML += "<li><input type='checkbox' class='caixa' id='"+entrada+"' value='"+entrada+"' onclick='riscar("+'"'+entrada+'","label'+entrada+'"'+")'> <label for='"+entrada+"' class='' id='label"+entrada+"'>"+entrada+"</label></li>";
                 document.getElementById("entrada").value = ""; //limpa o caixa de texto após add item
             }
             else{
@@ -68,14 +70,30 @@
         function listar(){
             limpar();
             listaCompras.forEach(item =>{ 
-                listaUL.innerHTML += "<li><input type='checkbox' id='"+item+"' class='caixa'><label>"+item+"</label></li>";
+                listaUL.innerHTML += "<li><input type='checkbox' id='"+item+"' class='caixa' onclick='riscar'("+'"'+item+'","label'+item+'"'+")'> <label for='"+item+"' class='' id='label"+item+"'>"+item+"</label></li>";
             });
         }
 
         function remover(){
-            listaCompras.pop();
+            //listaCompras.pop();//tira o último elemento da lista
+            listaCompras.forEach(item =>{
+                if(document.getElementById(item).checked){
+                    delete listaCompras[listaCompras.indexOf(item)];
+                }
+            });
             limpar();
             listar();
+        }
+
+        function riscar(caixa, rotulo){
+            caixa = document.getElementById(caixa);
+            rotulo = document.getElementById(rotulo);
+            if(caixa.checked){
+                rotulo.setAttribute("class","riscado");
+            }
+            else{
+                rotulo.setAttribute("class","");
+            }
         }
                       
     </script>
